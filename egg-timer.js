@@ -99,17 +99,28 @@ module.exports = function(RED) {
 				res.end();
 			}
 			// set the timer to the current specified value
-			function activateTimer(millis) {
+			function activateTimer() {
+				var millis = arguments[0];
+				var topic = null;
+				if (arguments.length > 1) topic = arguments[1];
 				if (isNaN(millis) || millis < 1 || millis > 2147483647) return;
-				node.send(prepareMessage(true));
+				node.send(prepareMessage(true, topic));
 				currentState.ends = currentState.started + millis;
 
 				timeout = setTimeout(function() {
-					node.send(prepareMessage(false));
+					node.send(prepareMessage(false, topic));
 				}, currentState.ends - new Date().getTime());
 			}
 			// this gives the node feedback which is also a carrier for the timeout value
-			function prepareMessage(value) {
+			// note this is changed for a variable number of arguments
+			// argument[0] will be the original 'value'
+			// argument[1] will be the 'topic'
+			function prepareMessage() {
+				var value = arguments[0]; // hopefully this is true
+				var topic = null;
+				if (arguments.length > 1) topic = arguments[1];
+
+				//node.warn("value, topic: " + value + ", " + topic);
 				if (timeout) clearTimeout(timeout);
 
 				if (value) {
@@ -133,7 +144,7 @@ module.exports = function(RED) {
 				const nmsg = {
 					payload: value
 				};
-				nmsg.topic = config.topic;					
+				nmsg.topic = ((topic === null) ? config.topic : topic);					
 				return nmsg; 
 			}
 
@@ -152,21 +163,24 @@ module.exports = function(RED) {
 					beforeEmit: function (msg, value) {
 						// TODO make sure incoming msg object is handled properly
 						// if we have received a timer value as part of the inbound message
+						var topic = null;
+						if (msg.hasOwnProperty("topic")) topic = msg.topic;
+						//node.warn("topic: " + topic);
 						if (msg.hasOwnProperty("timervalue") && Number.isInteger(msg.timervalue)) {
 							if (msg.timervalue === 0) {
-								node.send(prepareMessage(false));
+								node.send(prepareMessage(false, topic));
 							} else {
-								activateTimer(msg.timervalue*1000);
+								activateTimer(msg.timervalue*1000, topic);
 							}
 						} else {
 							if (value === RED.util.evaluateNodeProperty(config.onvalue,config.onvalueType,node)) {
-								activateTimer(config.timervalue*1000);
+								activateTimer(config.timervalue*1000, topic);
 							} else if (value === RED.util.evaluateNodeProperty(config.offvalue,config.offvalueType,node)) {
 								// prepareMessage(false);
-								node.send(prepareMessage(false));
+								node.send(prepareMessage(false, topic));
 							}
 						}
-						return {msg: msg};
+					return {msg: msg};
 					},
 					beforeSend: function (msg, orig) {
 						if (orig && orig.msg) {
