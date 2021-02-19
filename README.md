@@ -1,13 +1,16 @@
 # node-red-contrib-ui-egg-timer
-An egg timer type ui switch for node-red-dashboard. Switch it on and it goes off after a specified time.
+An egg timer type ui switch for node-red-dashboard. Switch it on and it goes off after a specified time. Thanks to Mario Fellinger for the inspiration.
     <p>This is a timer switch. It will remain on for only a specified period.</p>
     <h3>Outputs</h3>
         <dl class="message-properties">
         <dt>payload
-            <span class="property-type">string | buffer</span>
+            <span class="property-type">string | bool</span>
+        </dt>
+        <dt>topic
+            <span class="property-type">string</span>
         </dt>
     <h3>Details</h3>
-    <p>This node is designed to work with node-red-dashboard, and has a requirement that this be available. It leans heavily on work done by xxxxxxx and I hope they are no unhappy with this.</p>
+    <p>This node is designed to work with node-red-dashboard, and has a requirement that this be available. It leans heavily on work done by Mario Fellinger on his 'countdown-timer' and I hope he is no unhappy with this.</p>
     <br>
     <p>This node fulfills the requirement of a switch which once turned on, stays on for a specified time and then automatically turns off. 
         As ever, overrides are provided allowing better control within automated systems, but the UI is basically a switch as per normal dashboard.</p>
