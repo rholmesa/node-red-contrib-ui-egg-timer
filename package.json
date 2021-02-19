@@ -2,11 +2,23 @@
   "name": "node-red-contrib-ui-egg-timer",
   "version": "1.0.0",
   "description": "A switch which only stays on for a set time",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rholmesa/node-red-contrib-ui-egg-timer.git"
+},
   "node-red" : {
     "nodes": {
        "egg-timer": "egg-timer.js"
     }
  },
+ "contributors": [
+  {
+      "name": "Ron Holmes"
+  }
+],
+"dependencies": {
+  "node-red-dashboard": "2.27.0"
+},
   "main": "egg-timer.js",
   "directories": {
     "example": "examples"
