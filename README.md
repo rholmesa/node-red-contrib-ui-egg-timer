@@ -7,7 +7,7 @@ An egg timer type ui switch for node-red-dashboard. Switch it on and it goes off
             <span class="property-type">string | buffer</span>
         </dt>
     <h3>Details</h3>
-    <p>This node is designed to work with node-red-dashboard, and has a requirement that this be available. It leans heavily on work done by xxxxxxx and I hope they are no unhappy with this.</p>
+    <p>This node is designed to work with node-red-dashboard, and has a requirement that this be available. It leans heavily on work done by Mario Fellinger on his 'countdown-timer' and I hope he is no unhappy with this.</p>
     <br>
     <p>This node fulfills the requirement of a switch which once turned on, stays on for a specified time and then automatically turns off. 
         As ever, overrides are provided allowing better control within automated systems, but the UI is basically a switch as per normal dashboard.</p>
