@@ -1,5 +1,5 @@
 # node-red-contrib-ui-egg-timer
-An egg timer type ui switch for node-red-dashboard. Switch it on and it goes off after a specified time. Thanks to Mario Fellinger for the inspiration.
+An 'egg timer' type ui 'slider' style switch for node-red-dashboard. Switch it on and it switches off after a specified time. Thanks to Mario Fellinger for the inspiration.
     <p>This is a timer switch. It will remain on for only a specified period.</p>
     <h3>Outputs</h3>
         <dl class="message-properties">
