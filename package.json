@@ -26,13 +26,19 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "homepage": "https://github.com/rholmesa/node-red-contrib-ui-egg-timer#readme",
+  "bugs":  {
+    "url" : "https://github.com/rholmesa/node-red-contrib-ui-egg-timer/issues",
+    "email" : "rwgholmes@outlook.com"
+  },
   "keywords": [
     "ui",
     "countdown",
     "switch",
     "egg",
-    "timer"
+    "timer",
+    "node-red"
   ],
   "author": "Ron Holmes",
-  "license": "ISC"
+  "license": "Apache 2"
 }
