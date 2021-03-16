@@ -15,7 +15,7 @@ An 'egg timer' type ui 'slider' style switch for node-red-dashboard. Switch it o
     <p>This node fulfills the requirement of a switch which once turned on, stays on for a specified time and then automatically turns off. 
         As ever, overrides are provided allowing better control within automated systems, but the UI is basically a switch as per normal dashboard.</p>
     <br>
-    <p> The node-red editor provides configuration as per normal rules. The key points for this node are:</p>
+    <p> The node-red editor provides configuration as normal. The key points for this node are:</p>
     <p> <code>Label</code>: The label for the switch appearing on the web front end</p>
     <p> <code>Seconds</code>: The number of seconds for the switch to remain on.</p>
     <p> <code>On/Off Payload</code>: What should be sent for the appropriate condition.</p>
