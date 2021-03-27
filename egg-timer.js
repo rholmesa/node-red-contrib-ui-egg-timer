@@ -33,7 +33,7 @@ module.exports = function(RED) {
 		const styles = String.raw`
 		<style>
 			#${divPrimary} {
-				height:150px;
+				height:50px;
 				padding: 0 2px 0 6px;
 				overflow-x: hidden;
 			}
