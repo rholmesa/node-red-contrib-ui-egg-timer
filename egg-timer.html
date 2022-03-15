@@ -3,8 +3,6 @@ MIT License
 
 Copyright (c) 2021 Ron Holmes
 
-Thenks to Mario Fellinger for his countdown timer code.
-
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
@@ -24,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
 
-<script type="text/html" data-template-name="ui_egg_timer">
+<script type="text/html" data-template-name="node-red-contrib-ui-egg-timer">
 
     <div class="form-row" id="template-row-group">
        <label for="node-input-group"><i class="fa fa-table"></i> Group</span> </label>
@@ -76,8 +74,8 @@ SOFTWARE.
 </script>
 
 <script type="text/javascript">
-    RED.nodes.registerType('ui_egg_timer', {
-        category: 'holmes',
+    RED.nodes.registerType('node-red-contrib-ui-egg-timer', {
+        category: 'dashboard',
         color: 'rgb( 63, 173, 181)',
         defaults: {
             name: {value: ''},
@@ -149,7 +147,7 @@ SOFTWARE.
         },
     });
 </script>
-<script type="text/html" data-help-name="ui_egg_timer">
+<script type="text/html" data-help-name="node-red-contrib-ui-egg-timer">
     <p>This is a timer switch. It will remain on for only a specified period.</p>
     <h3>Outputs</h3>
         <dl class="message-properties">
@@ -157,7 +155,7 @@ SOFTWARE.
             <span class="property-type">string | buffer</span>
         </dt>
     <h3>Details</h3>
-    <p>This node is designed to work with node-red-dashboard, and has a requirement that this be available. It leans heavily on work done by Mario Fellinger and I hope he is not unhappy with this.</p>
+    <p>This node is designed to work with node-red-dashboard, and has a requirement that this be available. It leans heavily on work done by xxxxxxx and I hope they are no unhappy with this.</p>
     <br>
     <p>This node fulfills the requirement of a switch which once turned on, stays on for a specified time and then automatically turns off. 
         As ever, overrides are provided allowing better control within automated systems, but the UI is basically a switch as per normal dashboard.</p>

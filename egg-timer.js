@@ -33,9 +33,10 @@ module.exports = function(RED) {
 		const styles = String.raw`
 		<style>
 			#${divPrimary} {
-				height:50px;
-				padding: 0 2px 0 6px;
+				height: 46px;
+				padding: 0 0 0 6px;
 				overflow-x: hidden;
+				overflow-y: hidden;
 			}
 			#${divPrimary} md-select md-select-value {
 				color: var(--nr-dashboard-widgetTextColor);
@@ -46,15 +47,17 @@ module.exports = function(RED) {
 				width: 100%;
 				min-width: 36px;
 				height: 36px;
+				layout: row;
+				layout-align: space-between center;
 			}
 		</style>`
 		;
 		//
 		const timerBody = String.raw`
-		<div id="${divPrimary}" ng-init='init(${JSON.stringify(config)})'>
-		<md-content layout="row" layout-align="start center">
-			<label>${config.label}</label>
-			<md-switch aria-label="switch" layout-align="end center" ng-change="switchChanged(switchState)" ng-model="switchState"> </md-switch>
+		<div id="${divPrimary}" ng-init='init(${JSON.stringify(config)})' >
+		<md-content layout="row" layout-align="space-between center" style="overflow-x: hidden; overflow-y: hidden;">
+			<label>${config.label} (${config.timervalue})</label>
+			<md-switch aria-label="${config.label}" ng-change="switchChanged(switchState)" ng-model="switchState"> </md-switch>
 		</md-content>
 		</div>
 		`;
@@ -64,7 +67,8 @@ module.exports = function(RED) {
 		${timerBody}`
 		return html;
 	}
-
+	//  ui-card-size="6x1" layout="row" layout-align="space-between center"
+	//		${styles}
 	function checkConfig(config, node) {
 		if (!config) {
 		  node.error(RED._("egg-timer : No Configuration"));
@@ -164,7 +168,7 @@ module.exports = function(RED) {
 						// TODO make sure incoming msg object is handled properly
 						// if we have received a timer value as part of the inbound message
 						var topic = null;
-						if (msg.hasOwnProperty("topic")) topic = msg.topic;
+						if (msg.hasOwnProperty("topic")) topic = (msg.topic == "" ? null : msg.topic);
 						//node.warn("topic: " + topic);
 						if (msg.hasOwnProperty("timervalue") && Number.isInteger(msg.timervalue)) {
 							if (msg.timervalue === 0) {
@@ -216,7 +220,7 @@ module.exports = function(RED) {
 						// this uses AJAX to communicate to and from to front end (client side)
 						$scope.getState = function() {
 							$.ajax({
-								url: "ui-egg-timer/getNode/" + $scope.nodeId,
+								url: "node-red-contrib-ui-egg-timer/getNode/" + $scope.nodeId,
 								dataType: 'json',
 								async: true,
 								success: function(json) {
@@ -243,7 +247,7 @@ module.exports = function(RED) {
 						// but it is the server controlling the timing function
 						$scope.setServerTimeout = function(millis) {
 							$.ajax({
-								url: "ui-egg-timer/getNode/" + $scope.nodeId + "/" + millis,
+								url: "node-red-contrib-ui-egg-timer/getNode/" + $scope.nodeId + "/" + millis,
 								dataType: 'json',
 								async: true,
 								complete: function() {
@@ -270,10 +274,10 @@ module.exports = function(RED) {
 		}
 	};
 
-	RED.nodes.registerType("ui_egg_timer", EggTimerNode);
+	RED.nodes.registerType("node-red-contrib-ui-egg-timer", EggTimerNode);
 
 	const uiPath = ((RED.settings.ui || {}).path) || 'ui';
-	let nodePath = '/' + uiPath + '/ui-egg-timer/getNode/:nodeId';
+	let nodePath = '/' + uiPath + '/node-red-contrib-ui-egg-timer/getNode/:nodeId';
 	nodePath = nodePath.replace(/\/+/g, '/');
 	// these routines ensure a flow of info between server and client
 	RED.httpNode.get(nodePath, function(req, res) {
